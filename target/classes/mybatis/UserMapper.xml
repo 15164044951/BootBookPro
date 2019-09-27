@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 以接口方式实现后，namespace指定的是接口路径 -->
+<mapper namespace="com.test.sibo.mapper.UserMapper">
+
+
+
+		<select id="loadUserByUsername" resultType="com.test.sibo.entity.UserEntity">
+			SELECT u.*,hr.`role_name`
+		
+			FROM hao_user u,hao_user_role hur,hao_role hr
+			WHERE
+				u.`user_name`=#{username}
+				AND hur.role_id = hr.role_id
+				AND hur.`user_id`=u.`user_id`
+
+		
+		</select>
+
+
+
+</mapper>
