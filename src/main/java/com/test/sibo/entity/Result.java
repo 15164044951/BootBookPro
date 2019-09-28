@@ -1,47 +1,79 @@
 package com.test.sibo.entity;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.io.Serializable;
 
-public class Result {
+import com.fasterxml.jackson.annotation.JsonInclude;
 
-	
-	public HttpServletRequest httpServletRequest;
-	public HttpServletResponse httpServletResponse;
-	public String errorMsg;
-	public String msg;
-	public HttpServletRequest getHttpServletRequest() {
-		return httpServletRequest;
-	}
-	public void setHttpServletRequest(HttpServletRequest httpServletRequest) {
-		this.httpServletRequest = httpServletRequest;
-	}
-	public HttpServletResponse getHttpServletResponse() {
-		return httpServletResponse;
-	}
-	public void setHttpServletResponse(HttpServletResponse httpServletResponse) {
-		this.httpServletResponse = httpServletResponse;
-	}
-	public String getErrorMsg() {
-		return errorMsg;
-	}
-	public void setErrorMsg(String errorMsg) {
-		this.errorMsg = errorMsg;
-	}
-	public String getMsg() {
-		return msg;
-	}
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
-	
-	 @Override
-	    public String toString() {
-	        return "Result{" +
-	                "httpServletRequest=" + httpServletRequest +
-	                ", httpServletResponse='" + httpServletResponse + '\'' +
-	                ", errorMsg=" + errorMsg +", msg=" + msg+
-	                '}';
-	    }
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class Result<T> implements Serializable {
 
+    private int code;
+
+
+    private String message;
+
+   
+    private T data;
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public Result() {
+    }
+
+    private Result(int code, String message, T data) {
+        this.code = code;
+        this.message = message;
+        this.data = data;
+    }
+
+    public static<T> Result.ResultBuiler<T> builder(){
+        return new Result.ResultBuiler<T>();
+    }
+
+    public static class ResultBuiler<T>{
+        private int code;
+        private String message;
+        private T data;
+
+        public Result.ResultBuiler<T> code(int code){
+            this.code = code;
+            return this;
+        }
+
+        public Result.ResultBuiler<T> message(String message){
+            this.message = message;
+            return this;
+        }
+
+        public Result.ResultBuiler<T> data(T data){
+            this.data = data;
+            return this;
+        }
+
+        public Result<T> build(){
+            return new Result<T>(this.code,this.message,this.data);
+        }
+    }
 }

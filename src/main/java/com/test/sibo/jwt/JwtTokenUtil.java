@@ -1,7 +1,6 @@
 package com.test.sibo.jwt;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -13,11 +12,11 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
+import com.test.sibo.entity.UserEntity;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -180,15 +179,15 @@ public class JwtTokenUtil implements Serializable {
         return expiration.before(new Date());
     }
 
-    /**
-     * 生成时间是否在最后修改时间之前
-     * @param created   生成时间
-     * @param lastPasswordReset  最后修改密码时间
-     * @return
-     */
-    private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
-        return (lastPasswordReset != null && created.before(lastPasswordReset));
-    }
+//    /**
+//     * 生成时间是否在最后修改时间之前
+//     * @param created   生成时间
+//     * @param lastPasswordReset  最后修改密码时间
+//     * @return
+//     */
+//    private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
+//        return (lastPasswordReset != null && created.before(lastPasswordReset));
+//    }
 
     /**
      * 根据用户信息 生成token
@@ -196,9 +195,8 @@ public class JwtTokenUtil implements Serializable {
      * @return
      */
     public String generateAccessToken(UserDetails userDetails) {
-        JWTUserDetails user = (JWTUserDetails) userDetails;
+    	JWTUserDetails user = (JWTUserDetails) userDetails;
         Map<String, Object> claims = generateClaims(user);
-//        JSONObject json = (JSONObject) JSON.toJSON(o);
         claims.put(CLAIM_KEY_AUTHORITIES, JSON.toJSON(authoritiesToArray(user.getAuthorities())));
         return generateAccessToken(user.getUsername(), claims);
     }
@@ -278,14 +276,14 @@ public class JwtTokenUtil implements Serializable {
      * @param userDetails
      * @return
      */
-    public String generateRefreshToken(UserDetails userDetails) {
-        JWTUserDetails user = (JWTUserDetails) userDetails;
-        Map<String, Object> claims = generateClaims(user);
-        // 只授于更新 token 的权限
-        String roles[] = new String[]{ROLE_REFRESH_TOKEN};
-        claims.put(CLAIM_KEY_AUTHORITIES, JSON.toJSON(roles));
-        return generateRefreshToken(user.getUsername(), claims);
-    }
+//    public String generateRefreshToken(UserDetails userDetails) {
+//        JWTUserDetails user = (JWTUserDetails) userDetails;
+//        Map<String, Object> claims = generateClaims(user);
+//        // 只授于更新 token 的权限
+//        String roles[] = new String[]{ROLE_REFRESH_TOKEN};
+//        claims.put(CLAIM_KEY_AUTHORITIES, JSON.toJSON(roles));
+//        return generateRefreshToken(user.getUsername(), claims);
+//    }
 
     /**
      * 重新获取token
@@ -293,31 +291,31 @@ public class JwtTokenUtil implements Serializable {
      * @param claims
      * @return
      */
-    private String generateRefreshToken(String subject, Map<String, Object> claims) {
-        return generateToken(subject, claims, refresh_token_expiration);
-    }
-
-    public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
-        final Date created = getCreatedDateFromToken(token);
-        return !isCreatedBeforeLastPasswordReset(created, lastPasswordReset)
-                && (!isTokenExpired(token));
-    }
+//    private String generateRefreshToken(String subject, Map<String, Object> claims) {
+//        return generateToken(subject, claims, refresh_token_expiration);
+//    }
+//
+//    public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
+//        final Date created = getCreatedDateFromToken(token);
+//        return !isCreatedBeforeLastPasswordReset(created, lastPasswordReset)
+//                && (!isTokenExpired(token));
+//    }
 
     /**
      * 刷新重新获取token
      * @param token 源token
      * @return
      */
-    public String refreshToken(String token) {
-        String refreshedToken;
-        try {
-            final Claims claims = getClaimsFromToken(token);
-            refreshedToken = generateAccessToken(claims.getSubject(), claims);
-        } catch (Exception e) {
-            refreshedToken = null;
-        }
-        return refreshedToken;
-    }
+//    public String refreshToken(String token) {
+//        String refreshedToken;
+//        try {
+//            final Claims claims = getClaimsFromToken(token);
+//            refreshedToken = generateAccessToken(claims.getSubject(), claims);
+//        } catch (Exception e) {
+//            refreshedToken = null;
+//        }
+//        return refreshedToken;
+//    }
 
     private String generateToken(String subject, Map<String, Object> claims, long expiration) {
         return Jwts.builder()

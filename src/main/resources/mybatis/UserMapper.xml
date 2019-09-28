@@ -19,6 +19,18 @@
 
 		
 		</select>
+		
+		
+		<update id="updateToken" parameterType="com.test.sibo.entity.UserEntity">
+				UPDATE hao_user SET user_token = #{user_token} where  user_name=#{user_name}
+		</update>
+		
+		<select id="getToken" resultType="java.lang.String"  parameterType="java.lang.String">
+					SELECT user_token
+					FROM hao_user
+					WHERE
+							user_name=#{username}
+		</select>
 
 
 

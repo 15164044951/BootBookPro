@@ -8,8 +8,15 @@ public class UserEntity {
 	public String head_img;
 	public String role_name;
 	public Boolean enabled;
+	public String user_token;
 	
 	
+	public String getUser_token() {
+		return user_token;
+	}
+	public void setUser_token(String user_token) {
+		this.user_token = user_token;
+	}
 	public Boolean getEnabled() {
 		return enabled;
 	}

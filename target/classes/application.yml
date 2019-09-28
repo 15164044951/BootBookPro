@@ -7,7 +7,8 @@ spring:
   datasource: 
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/haowangjiadb?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    #url: jdbc:mysql://localhost:3306/haowangjiadb?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://localhost:3306/haowangjia?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
     password: root
     druid: 
@@ -41,7 +42,7 @@ jwt:
   # 密匙key
   secret: mySecret
   # 过期时间   单位秒 7天后过期  604800
-  expiration: 3600
+  expiration: 604800
   # 自定义token 前缀字符
   tokenHead: Bearer-
   # 超时时间   单位秒

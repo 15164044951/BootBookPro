@@ -29,16 +29,17 @@ public class JWTUserDetails implements UserDetails {
 
     public JWTUserDetails(UserEntity userInfo, Collection<? extends GrantedAuthority> authorities) {
         this.userInfo = userInfo;
-        if (userInfo != null && StringUtils.isEmpty(userInfo.getUser_name())) {
+        if (userInfo != null ) {//&& StringUtils.isEmpty(userInfo.getUser_name())
             this.userId = Long.parseLong(String.valueOf(userInfo.getUser_id()));
             this.username = userInfo.getUser_name();
             this.password = userInfo.getUser_password();
-            this.enabled = userInfo.getEnabled() ? false : true;
+            //userInfo.getEnabled() ? false : 
+            this.enabled = true;
             this.isAccountNonExpired = true;
             this.isAccountNonLocked = true;
             this.isCredentialsNonExpired = true;
             this.authorities = authorities;
-//            this.lastPasswordResetDate = userInfo.getLastPasswordResetDate();
+//            this.lastPasswordResetDate = null;
         } else {
             throw new IllegalArgumentException("Cannot pass null or empty values to constructor");
         }
@@ -54,7 +55,7 @@ public class JWTUserDetails implements UserDetails {
             this.isAccountNonLocked = isAccountNonLocked;
             this.isCredentialsNonExpired = isCredentialsNonExpired;
             this.authorities = authorities;
-            //this.lastPasswordResetDate = lastPasswordResetDate;
+//            this.lastPasswordResetDate = lastPasswordResetDate;
         } else {
             throw new IllegalArgumentException("Cannot pass null or empty values to constructor");
         }
