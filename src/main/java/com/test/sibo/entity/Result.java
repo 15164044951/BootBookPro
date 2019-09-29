@@ -1,79 +1,71 @@
 package com.test.sibo.entity;
 
-import java.io.Serializable;
+import com.alibaba.fastjson.JSON;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+/**
+ * 统一API响应结果封装
+ *
+ * @author fei.yu
+ * @date 2018/06/09
+ */
+public class Result {
+    /**
+     * 状态码
+     */
+    private final Integer code;
+    /**
+     * 消息
+     */
+    private final String msg;
+    /**
+     * 数据内容，比如列表，实体
+     */
+    private final Object data;
 
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class Result implements Serializable {
-
-    private int code;
-
-
-    private String message;
-
-   
-    private Object data;
-
-    public Object getData() {
-        return data;
+    private Result(final Builder builder) {
+        this.code = builder.code;
+        this.msg = builder.msg;
+        this.data = builder.data;
     }
 
-    public void setData(Object data) {
-        this.data = data;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public Result() {
-    }
-
-    private Result(int code, String message, Object data) {
-        this.code = code;
-        this.message = message;
-        this.data = data;
-    }
-
-    public static Result.ResultBuiler builder(){
-        return new Result.ResultBuiler();
-    }
-
-    public static class ResultBuiler{
-        private int code;
-        private String message;
+    public static class Builder {
+        private final Integer code;
+        private String msg;
         private Object data;
 
-        public Result.ResultBuiler code(int code){
+        public Builder(final Integer code) {
             this.code = code;
+        }
+
+        public Builder msg(final String msg) {
+            this.msg = msg;
             return this;
         }
 
-        public Result.ResultBuiler message(String message){
-            this.message = message;
-            return this;
-        }
-
-        public Result.ResultBuiler data(Object data){
+        public Builder data(final Object data) {
             this.data = data;
             return this;
         }
 
-        public Result build(){
-            return new Result(this.code,this.message,this.data);
+        public Result build() {
+            return new Result(this);
         }
+    }
+
+    public Integer getCode() {
+        return this.code;
+    }
+
+    public String getMsg() {
+        return this.msg;
+    }
+
+    public Object getData() {
+        return this.data;
+    }
+
+    @Override
+    public String toString() {
+        return JSON.toJSONString(this);
     }
 }

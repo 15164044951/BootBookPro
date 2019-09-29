@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
-import com.test.sibo.util.Result;
+import com.test.sibo.entity.Result;
 import com.test.sibo.util.ResultGenerator;
 
 /**
@@ -90,7 +90,7 @@ public class ExceptionResolver {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
     public Result globalException(final HttpServletRequest request, final Throwable e) {
-        log.error("全局异常 => {}", e.getMessage());
+        log.error("全局异常 => {}", e.getMessage(),e.getClass());
         return ResultGenerator.genInternalServerErrorResult(String.format("%s => %s", request.getRequestURI(), e.getMessage()));
     }
 }

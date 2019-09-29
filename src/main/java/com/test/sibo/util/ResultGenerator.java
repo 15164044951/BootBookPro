@@ -2,6 +2,8 @@ package com.test.sibo.util;
 
 import org.springframework.http.HttpStatus;
 
+import com.test.sibo.entity.Result;
+
 /**
  * 响应结果生成工具
  *

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL
+									ALL
+									等级最低，用于打开所有日志记录。
+									TRACE
+									较低的日志级别，通常不会被使用。
+									DEBUG
+									开发过程中打印一些运行信息。
+									INFO
+									粗粒度级别上突出强调应用程序的运行过程。
+									打印一些你感兴趣的或者重要的信息。
+									用于生产环境中输出程序运行的一些重要信息，但是不能滥用，避免打印过多的日志。
+									WARN
+									警告信息，潜在的问题信息，在生产日志中，作为给程序员的一种提醒而使用。
+									ERROR
+									打印错误日志，但是不会影响程序继续运行。
+									FATAL
+									打印严重错误，会导致程序退出。
+									OFF
+									最高级别，关闭所有日志。
+ -->
+<configuration status="INFO" monitorInterval="30">
+		    <Properties>
+		        <!-- 格式化输出：%date表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度 %msg：日志消息，%n是换行符-->
+    		    <!-- %logger{36} 表示 Logger 名字最长36个字符     
+    		    <property name="FILE_PATH" value="" />
+    		    <property name="FILE_NAME" value="app-micservice" />-->		        
+		        <property name="LOG_PATTERN" value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />		       
+		    
+		        <!-- 高亮控制台输出   <Property name="log_pattern_highlight">%highlight{${log_pattern}}{FATAL=Bright Red, ERROR=Magenta, WARN=Cyan, INFO=Green, DEBUG=Yellow, TRACE=Bright Blue}</Property>-->
+		       
+		    </Properties>
+		    
+		    <appenders>
+		      		  <console name="Console" target="SYSTEM_OUT">
+					      <!--输出日志的格式-->
+					      <PatternLayout pattern="${LOG_PATTERN}"/>
+					      <!--控制台只输出level及其以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+					      <ThresholdFilter level="TRACE" onMatch="ACCEPT" onMismatch="DENY"/>
+   					 </console>
+		
+
+		    </appenders>
+
+
+
+   <loggers>
+        <!--过滤掉spring和mybatis的一些无用的debug信息-->
+        <logger name="org.springframework" level="INFO">
+        </logger>
+        <logger name="org.mybatis" level="INFO">
+        </logger>
+        <root level="all">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileDebug"/>
+            <appender-ref ref="RollingFileInfo"/>
+            <appender-ref ref="RollingFileWarn"/>
+            <appender-ref ref="RollingFileError"/>
+        </root>
+    </loggers>
+</configuration>

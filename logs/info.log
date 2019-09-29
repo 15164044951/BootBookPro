@@ -1,0 +1,49 @@
+22:03:09.633 [main] INFO  com.test.sibo.Application - Starting Application on 2S2Y337DMDMWHV7 with PID 9388 (C:\Users\Administrator\git\BootBookPro\target\classes started by Administrator in C:\Users\Administrator\git\BootBookPro)
+22:03:09.642 [main] INFO  com.test.sibo.Application - No active profile set, falling back to default profiles: default
+22:03:12.030 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (http)
+22:03:12.049 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8888"]
+22:03:12.064 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+22:03:12.065 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.24]
+22:03:12.310 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+22:03:12.310 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2593 ms
+22:03:13.339 [main] INFO  org.springframework.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1c00d406, org.springframework.security.web.context.SecurityContextPersistenceFilter@6fef75c6, org.springframework.security.web.header.HeaderWriterFilter@52c46334, org.springframework.security.web.authentication.logout.LogoutFilter@2b098563, com.test.sibo.jwt.JwtAuthenticationTokenFilter@3e6748ae, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@334540a0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2fac80a8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@16ac4d3d, org.springframework.security.web.session.SessionManagementFilter@64910b2d, org.springframework.security.web.access.ExceptionTranslationFilter@7757025d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@8ac12e6]
+22:03:13.668 [main] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+22:03:14.109 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8888"]
+22:03:14.144 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (http) with context path ''
+22:03:14.147 [main] INFO  com.test.sibo.Application - Started Application in 5.18 seconds (JVM running for 6.114)
+22:03:17.785 [http-nio-8888-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+22:03:17.785 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+22:03:17.807 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 22 ms
+22:03:17.996 [http-nio-8888-exec-1] INFO  com.test.sibo.aop.SpringAop - pointObj=execution(Result com.test.sibo.controller.UserController.loginUser(Map))
+22:03:17.996 [http-nio-8888-exec-1] INFO  com.test.sibo.aop.SpringAop - 参数为={username=liusibo, userpassword=123456}
+22:03:17.997 [http-nio-8888-exec-1] INFO  com.test.sibo.aop.SpringAop - StringJoinpoint=execution(Result com.test.sibo.controller.UserController.loginUser(Map))
+22:03:18.129 [http-nio-8888-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+22:03:18.511 [http-nio-8888-exec-1] INFO  com.test.sibo.jwt.JwtUtil - User<liusibo> : authorities => admin
+22:03:19.146 [http-nio-8888-exec-1] INFO  com.test.sibo.aop.SpringAop - pointObj={"code":200,"data":{"user_id":0,"user_name":"liusibo","user_token":"Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eNqqViouTVKyUsrJLC3OTMpX0lFKLC3JAAokpuRm5gG5qRUFSlaGpuYGxuYGppYWtQAAAAD__w.XtmEM35zLkqMq_QX-KRLGuoXS6-phe-XR8olMzITs8lOR-wBTEUbUoTR3imKszKg_-TT18FwkARjJLmc1qWijg"},"msg":"OK"}
+22:03:33.808 [http-nio-8888-exec-3] INFO  com.test.sibo.aop.SpringAop - pointObj=execution(Result com.test.sibo.controller.UserController.loginUser(Map))
+22:03:33.808 [http-nio-8888-exec-3] INFO  com.test.sibo.aop.SpringAop - 参数为={username=liusibo, userpassword=123456}
+22:03:33.808 [http-nio-8888-exec-3] INFO  com.test.sibo.aop.SpringAop - StringJoinpoint=execution(Result com.test.sibo.controller.UserController.loginUser(Map))
+22:03:33.904 [http-nio-8888-exec-3] INFO  com.test.sibo.jwt.JwtUtil - User<liusibo> : authorities => admin
+22:03:33.932 [http-nio-8888-exec-3] INFO  com.test.sibo.aop.SpringAop - pointObj={"code":200,"data":{"user_id":0,"user_name":"liusibo","user_token":"Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eNqqViouTVKyUsrJLC3OTMpX0lFKLC3JAAokpuRm5gG5qRUFSlaGpuYGxuYGZobGtQAAAAD__w.JJC3u23mcSNWGla7el-_ehsYQu8bkH4Q3p8xCyQLoJWqql4uwwcH2WvOMUFZD5H5UD7VEzbXA1LgkOk_Vdv4YQ"},"msg":"OK"}
+22:06:58.711 [main] INFO  com.test.sibo.Application - Starting Application on 2S2Y337DMDMWHV7 with PID 5044 (C:\Users\Administrator\git\BootBookPro\target\classes started by Administrator in C:\Users\Administrator\git\BootBookPro)
+22:06:58.719 [main] INFO  com.test.sibo.Application - No active profile set, falling back to default profiles: default
+22:07:01.250 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8888 (http)
+22:07:01.273 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8888"]
+22:07:01.287 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+22:07:01.289 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.24]
+22:07:01.534 [main] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+22:07:01.535 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 2741 ms
+22:07:02.660 [main] INFO  org.springframework.security.web.DefaultSecurityFilterChain - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2fac80a8, org.springframework.security.web.context.SecurityContextPersistenceFilter@52d96367, org.springframework.security.web.header.HeaderWriterFilter@25218a4d, org.springframework.security.web.authentication.logout.LogoutFilter@5458c71e, com.test.sibo.jwt.JwtAuthenticationTokenFilter@795b66d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3302035b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@19105a87, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6987a133, org.springframework.security.web.session.SessionManagementFilter@634aa81e, org.springframework.security.web.access.ExceptionTranslationFilter@7e747037, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6fef75c6]
+22:07:03.020 [main] INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+22:07:03.464 [main] INFO  org.apache.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8888"]
+22:07:03.506 [main] INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8888 (http) with context path ''
+22:07:03.511 [main] INFO  com.test.sibo.Application - Started Application in 5.458 seconds (JVM running for 6.47)
+22:07:06.482 [http-nio-8888-exec-1] INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+22:07:06.482 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+22:07:06.500 [http-nio-8888-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 18 ms
+22:07:06.676 [http-nio-8888-exec-1] INFO  com.test.sibo.aop.SpringAop - pointObj=execution(Result com.test.sibo.controller.UserController.loginUser(Map))
+22:07:06.677 [http-nio-8888-exec-1] INFO  com.test.sibo.aop.SpringAop - 参数为={username=liusibo, userpassword=123456}
+22:07:06.677 [http-nio-8888-exec-1] INFO  com.test.sibo.aop.SpringAop - StringJoinpoint=execution(Result com.test.sibo.controller.UserController.loginUser(Map))
+22:07:06.900 [http-nio-8888-exec-1] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+22:07:07.304 [http-nio-8888-exec-1] INFO  com.test.sibo.jwt.JwtUtil - User<liusibo> : authorities => admin
+22:07:07.904 [http-nio-8888-exec-1] INFO  com.test.sibo.aop.SpringAop - pointObj={"code":200,"data":{"user_id":0,"user_name":"liusibo","user_token":"Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkRFRiJ9.eNqqViouTVKyUsrJLC3OTMpX0lFKLC3JAAokpuRm5gG5qRUFSlaGpuYGxuYGFkbmtQAAAAD__w.AegvB9C-47x2N30nCuG-sNeS6LkmBBzZzo09Wkaoc5KOnQ69ePih98KAvzTx8izG93-OCajzbPrO_bcqEYdFtw"},"msg":"OK"}
