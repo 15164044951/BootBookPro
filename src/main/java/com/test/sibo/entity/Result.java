@@ -5,7 +5,7 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Result<T> implements Serializable {
+public class Result implements Serializable {
 
     private int code;
 
@@ -13,13 +13,13 @@ public class Result<T> implements Serializable {
     private String message;
 
    
-    private T data;
+    private Object data;
 
-    public T getData() {
+    public Object getData() {
         return data;
     }
 
-    public void setData(T data) {
+    public void setData(Object data) {
         this.data = data;
     }
 
@@ -42,38 +42,38 @@ public class Result<T> implements Serializable {
     public Result() {
     }
 
-    private Result(int code, String message, T data) {
+    private Result(int code, String message, Object data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    public static<T> Result.ResultBuiler<T> builder(){
-        return new Result.ResultBuiler<T>();
+    public static Result.ResultBuiler builder(){
+        return new Result.ResultBuiler();
     }
 
-    public static class ResultBuiler<T>{
+    public static class ResultBuiler{
         private int code;
         private String message;
-        private T data;
+        private Object data;
 
-        public Result.ResultBuiler<T> code(int code){
+        public Result.ResultBuiler code(int code){
             this.code = code;
             return this;
         }
 
-        public Result.ResultBuiler<T> message(String message){
+        public Result.ResultBuiler message(String message){
             this.message = message;
             return this;
         }
 
-        public Result.ResultBuiler<T> data(T data){
+        public Result.ResultBuiler data(Object data){
             this.data = data;
             return this;
         }
 
-        public Result<T> build(){
-            return new Result<T>(this.code,this.message,this.data);
+        public Result build(){
+            return new Result(this.code,this.message,this.data);
         }
     }
 }
