@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL 
+	ALL 等级最低，用于打开所有日志记录。 TRACE 较低的日志级别，通常不会被使用。 DEBUG 开发过程中打印一些运行信息。 INFO 粗粒度级别上突出强调应用程序的运行过程。 
+	打印一些你感兴趣的或者重要的信息。 用于生产环境中输出程序运行的一些重要信息，但是不能滥用，避免打印过多的日志。 WARN 警告信息，潜在的问题信息，在生产日志中，作为给程序员的一种提醒而使用。 
+	ERROR 打印错误日志，但是不会影响程序继续运行。 FATAL 打印严重错误，会导致程序退出。 OFF 最高级别，关闭所有日志。 -->
+<configuration status="INFO" monitorInterval="30">
+	<Properties>
+		 <property name="FILE_PATH" value="D://abc" /> 
+		 <property name="FILE_NAME" value="app-micservice" /> 
+		<property name="LOG_PATTERN"
+			value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+
+		<!-- 高亮控制台输出 <Property name="log_pattern_highlight">%highlight{${log_pattern}}{FATAL=Bright 
+			Red, ERROR=Magenta, WARN=Cyan, INFO=Green, DEBUG=Yellow, TRACE=Bright Blue}</Property> -->
+
+	</Properties>
+
+	<appenders>
+		<console name="Console" target="SYSTEM_OUT">
+			<!--输出日志的格式 -->
+			<PatternLayout pattern="${LOG_PATTERN}" />
+			<!--控制台只输出level及其以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+			<ThresholdFilter level="TRACE" onMatch="ACCEPT"
+				onMismatch="DENY" />
+		</console>
+
+		<RollingFile name="RollingFileInfo" fileName="${FILE_PATH}/info.log" filePattern="${FILE_PATH}/${FILE_NAME}-INFO-%d{yyyy-MM-dd}_%i.log.gz">
+			      <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+			<ThresholdFilter level="info" onMatch="ACCEPT" onMismatch="DENY"/>
+			<PatternLayout pattern="${LOG_PATTERN}" />
+			<Policies>
+		        <!--interval属性用来指定多久滚动一次，默认是1 hour -->
+				<TimeBasedTriggeringPolicy interval="1"/>
+				<SizeBasedTriggeringPolicy size="10MB"/>
+			</Policies>
+			      <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件开始覆盖 -->
+			<DefaultRolloverStrategy max="15"/>
+		</RollingFile>
+
+	</appenders>
+
+
+
+	<loggers>
+		<!--过滤掉spring和mybatis的一些无用的debug信息 -->
+		<logger name="org.springframework" level="INFO" additivity="false">
+			<AppenderRef ref="Console"/>
+		</logger>
+		<logger name="org.mybatis" level="INFO" additivity="false">
+			<AppenderRef ref="Console"/>
+		</logger>
+		<root level="info">
+			<appender-ref ref="Console" />
+			<appender-ref ref="RollingFileInfo" />
+		</root>
+	</loggers>
+</configuration>

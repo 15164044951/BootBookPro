@@ -2,11 +2,13 @@ package com.test.sibo.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
+/**
+ * 
+ * BCrypt密码工具类
+ * */
 public class BCryptPasswordUtil {
 
-
-	
-	
 	//加密密码
 	public static String getPasswordBCrypt(String password) {
 		BCryptPasswordEncoder bcrytPwd= new BCryptPasswordEncoder();

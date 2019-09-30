@@ -2,6 +2,8 @@ package com.test.sibo.controller;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,33 +20,37 @@ import com.test.sibo.util.BCryptPasswordUtil;
 import com.test.sibo.util.ResultGenerator;
 
 
-
+/**
+ * 登陆类
+ * 
+ * */
 @RestController
 @RequestMapping("/login")
 public class UserController {
-	
+	private final static Logger log = LoggerFactory.getLogger(UserController.class);
 	
 	@Autowired
 	CustomUserDetailsService custUserService;
+	
 	@Autowired
 	JwtUtil jutil;
 	
 	@Autowired
 	UserService userservice;
 	
-	
+	/**
+	 * 账号登陆
+	 *  userlogin
+	 * */
 	@PostMapping("/userlogin")
 	public Result loginUser(@RequestBody Map<String ,String> usermap) {
 		UserEntity userentity=new UserEntity();
 		UserDetails userdetails=null;
-		try {
-			 userdetails=custUserService.loadUserByUsername(usermap.get("username"));
-		} catch (Exception e) {
-			return 	ResultGenerator.genFailedResult("登录认证不通过");
-		}		
+		//登陆认证
+		userdetails=custUserService.loadUserByUsername(usermap.get("username"));	
 		String str;
 		if(userdetails!=null) {
-//			System.out.println(userdetails.getPassword());
+			//以工具类BCryptPasswordUtil，验证密码是否一致
 			if(BCryptPasswordUtil.passwordBCryptTorF(usermap.get("userpassword"), userdetails.getPassword())) {
 				//生成Token
 				str=jutil.sign(userdetails.getUsername(),userdetails.getAuthorities());
@@ -52,15 +58,26 @@ public class UserController {
 				userentity.setUser_token(str);
 				//更新Token
 				userservice.updateToken(userentity);				
-				//return Result.builder().code(200).message("登录成功").data(userentity);
+				log.info("账号："+userentity.getUser_name()+"登陆成功");
 				return ResultGenerator.genOkResult(userentity);
 			}else {
+				log.error("账号："+usermap.get("username")+"登陆失败，密码错误");
 				return ResultGenerator.genFailedResult("密码不通过");
 			}			
 		}
+			log.error("账号："+usermap.get("username")+"查无此人");
 			return ResultGenerator.genFailedResult("查无此人");
 		
 		
+	}
+	
+	/**
+	 * 加密密码接口
+	 * */
+	@PostMapping("/getBCryptPwd")
+	public Result getPasswordBCrypt(@RequestBody Map<String ,String> usermap) {
+		String enpassword=BCryptPasswordUtil.getPasswordBCrypt(usermap.get("userpassword"));
+		return ResultGenerator.genOkResult(enpassword);
 	}
 	
 	

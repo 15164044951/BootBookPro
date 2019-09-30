@@ -20,7 +20,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.test.sibo.security.CustomUserDetailsService;
 import com.test.sibo.service.UserService;
 
-
+/**
+ * 拦截器：拦截验证登陆，或者是带token的接口访问
+ * */
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter{
 	

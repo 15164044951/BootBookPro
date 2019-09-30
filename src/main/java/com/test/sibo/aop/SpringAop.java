@@ -39,41 +39,38 @@ public class SpringAop {
 
 	 @Before("HttpAopLog()")
 	 public void doBefore(JoinPoint joinPoint){
-//		 LOGGER.info("joinPoint={}",joinPoint.toString());
-		 //获取方法参数值数组
-	       Object[] args = joinPoint.getArgs();
 
+	     Object[] args = joinPoint.getArgs();
+	     LOGGER.info("==================HTTPJoinPointRUN===============");
 		 LOGGER.info("参数为={}",args);
 		 LOGGER.info("StringJoinpoint={}",joinPoint.toString());
+		 LOGGER.info("JoingetSignature={}",joinPoint.getSignature());
+		 LOGGER.info("==================HTTPJoinPointEND===============");
 	 }
 	 
-	 @Around("HttpAopLog()")
-	 public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-		 LOGGER.info("pointObj={}",proceedingJoinPoint.toString());
-		 
-		 
-		 
-		 @SuppressWarnings("unused")
-		Result result=null;
-		 
-		 try {			 
-			 Object pointObj=proceedingJoinPoint.proceed();
-		     if (pointObj instanceof Result) {
-		    	 result = (Result) pointObj;
-	            } else {
-	            	ResultGenerator.genOkResult(pointObj);
-	            }
-			 LOGGER.info("pointObj={}",pointObj.toString());
-		 	 return result;
-		
-		}catch (NoHandlerFoundException e) {
-			 LOGGER.info("errorpointObj={}",e.getMessage());
-		 }//proceedingJoinPoint
-
-		 return null;
-
-	 
-	 }
+//	 @Around("HttpAopLog()")
+//	 public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+//		 LOGGER.info("pointObj={}",proceedingJoinPoint.toString());
+//
+//		 Result result=null;		 
+//		 try {			 
+//			 Object pointObj=proceedingJoinPoint.proceed();
+//		     if (pointObj instanceof Result) {
+//		    	 result = (Result) pointObj;
+//	            } else {
+//	            	ResultGenerator.genOkResult(pointObj);
+//	            }
+//			 LOGGER.info("pointObj={}",pointObj.toString());
+//		 	 return result;
+//		
+//		}catch (NoHandlerFoundException e) {
+//			 LOGGER.info("errorpointObj={}",e.getMessage());
+//		 }//proceedingJoinPoint
+//
+//		 return null;
+//
+//	 
+//	 }
 	 
 //	   @AfterReturning(pointcut = "HttpAopLog()",returning = "object")//打印输出结果
 //	   public void doAfterReturing(Object object){
