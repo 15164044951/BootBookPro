@@ -25,4 +25,10 @@ public class UserServiceImpl implements UserService {
 		return usermapper.getToken(username);
 	}
 
+	@Override
+	public UserEntity loadUserByUsername(String username) {
+		// TODO Auto-generated method stub
+		return usermapper.loadUserByUsername(username);
+	}
+
 }

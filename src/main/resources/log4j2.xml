@@ -6,7 +6,7 @@
 	ERROR 打印错误日志，但是不会影响程序继续运行。 FATAL 打印严重错误，会导致程序退出。 OFF 最高级别，关闭所有日志。 -->
 <configuration status="INFO" monitorInterval="30">
 	<Properties>
-		 <property name="FILE_PATH" value="D://abc" /> 
+		 <property name="FILE_PATH" value="D://EclipseLogs" /> 
 		 <property name="FILE_NAME" value="app-micservice" /> 
 		<property name="LOG_PATTERN"
 			value="%date{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />

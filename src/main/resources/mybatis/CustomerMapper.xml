@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.test.sibo.mapper.CustomerMapper">
+
+	<sql id="listWhereCustomer">
+		WHERE 
+			1 = 1
+			<if test="searchText!=null and searchText!=''">
+				and  customer_searchtext LIKE CONCAT("%",#{searchText},"%")
+			</if>
+	</sql>
+	<select id="listCustomer" resultType="com.test.sibo.entity.CustomerEntity" parameterType="Map">
+			SELECT * 
+			FROM `hao_customer` 
+			<include refid="listWhereCustomer"/>
+			ORDER BY customer_id DESC
+	</select>
+	<select id="listCustomerFive" resultType="com.test.sibo.entity.CustomerEntity">
+			SELECT * 
+			FROM `hao_customer` 
+			ORDER BY customer_id DESC
+			LIMIT 0,5	
+	</select>
+	
+	<select id="getCustomer" resultType="com.test.sibo.entity.CustomerEntity" parameterType="int">
+			SELECT hc.* 
+			FROM `hao_customer` hc
+			WHERE 
+				hc.`customer_id`=#{id}
+	</select>
+	<insert id="insertCustomer" parameterType="com.test.sibo.entity.CustomerEntity" >
+				INSERT INTO `haowangjia`.`hao_customer`
+			            (
+			             `customer_name`,
+			             `customer_type`,
+			             `customer_phone`,
+			             `customer_details`,
+			             `customer_state`,
+			             `customer_fast`,
+			             `customer_price`,
+			             `customer_optime`,
+			             `customer_starttime`,
+			             `customer_searchtext`)
+			VALUES (
+			        #{customer_name},
+			        #{customer_type},
+			        #{customer_phone},
+			        #{customer_details},
+			        0,
+			        #{customer_fast},
+			       #{customer_price},
+			        NOW(),
+			        NOW(),
+			        #{customer_searchtext});
+	</insert>
+	
+</mapper>

@@ -41,7 +41,7 @@ public class SpringAop {
 	 public void doBefore(JoinPoint joinPoint){
 
 	     Object[] args = joinPoint.getArgs();
-	     LOGGER.info("==================HTTPJoinPointRUN===============");
+	     LOGGER.info("==================HTTPJoinPointRUN：开始===============");
 		 LOGGER.info("参数为={}",args);
 		 LOGGER.info("StringJoinpoint={}",joinPoint.toString());
 		 LOGGER.info("JoingetSignature={}",joinPoint.getSignature());

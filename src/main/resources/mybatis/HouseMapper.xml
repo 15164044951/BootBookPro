@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.test.sibo.mapper.HouseMapper">
+
+		<sql id="houselistWhere">
+					WHERE
+							1 = 1
+							<if  test="searchText!=null and searchText!=''">
+								and	house_searchtext LIKE concat("%",#{searchText},"%")
+							</if>
+		</sql>
+
+			<select id="listHouse" resultType="com.test.sibo.entity.HouseEntity" parameterType="Map">
+						SELECT * 
+						FROM `hao_house` 
+						<include refid="houselistWhere" />
+						
+			</select>
+			
+			<select id="listHouseFive" resultType="com.test.sibo.entity.HouseEntity">
+						SELECT * 
+						FROM `hao_house`
+						ORDER BY house_createdate DESC 
+						LIMIT 0,5
+			</select>
+			
+			<select id="getHouseDetails" resultType="com.test.sibo.entity.HouseEntity" parameterType="int">
+						SELECT * 
+						FROM `hao_house` 
+						WHERE house_id = #{houseid}
+			</select>
+			<insert id="insertHouse" parameterType="com.test.sibo.entity.HouseEntity" >
+				INSERT INTO `haowangjia`.`hao_house`
+			            (
+			             `house_name`,
+			               <if test="house_remarks!=null and house_remarks!=''">
+			             	 `house_remarks`,
+			             </if>
+
+			             `house_address`,
+			             `house_type`,
+			             <if test="house_sellingprice!=null and house_sellingprice!=''">
+			             	`house_sellingprice`,
+			             </if>
+			              <if test="house_rentalprice!=null and house_rentalprice!=''">
+			             	`house_rentalprice`,
+			              </if>
+			              <if test="house_rentalstate!=null and house_rentalstate!=''">
+			            	 `house_rentalstate`,
+			             </if>
+			             `house_area`,
+			             `house_shi`,
+			             `house_ting`,
+			             `house_wei`,
+			             `house_chu`,
+			              <if test="house_selltype!=null and house_selltype!=''">
+			            	 `house_selltype`,
+			             </if>
+			             
+			             `house_owner`,
+			             `house_phone`,
+			             `house_opdate`,
+			             `house_createdate`,
+			             `house_searchtext`)
+			VALUES (
+			        #{house_name},
+			        <if test="house_remarks!=null and house_remarks!=''">
+			             	#{house_remarks},
+			        </if>
+			         
+			         #{house_address},
+			         #{house_type},
+			             <if test="house_sellingprice!=null and house_sellingprice!=''">
+			             	 #{house_sellingprice},
+			             </if>
+			              <if test="house_rentalprice!=null and house_rentalprice!=''">
+			             	 #{house_rentalprice},
+			              </if>
+			              <if test="house_rentalstate!=null and house_rentalstate!=''">
+			            	  #{house_rentalstate},
+			             </if>
+			         #{house_area},
+			         #{house_shi},
+			         #{house_ting},
+			         #{house_wei},
+			         #{house_chu},
+			         <if test="house_selltype!=null and house_selltype!=''">
+			            	  #{house_selltype},
+			          </if>
+			         #{house_owner},
+			         #{house_phone},
+			       		NOW(),
+			        	NOW(),
+			         #{house_searchtext});
+			</insert>
+</mapper>

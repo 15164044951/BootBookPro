@@ -7,6 +7,7 @@ import com.test.sibo.entity.UserEntity;
 @Mapper
 public interface UserMapper {
 	
+	//查询账号信息
 	public UserEntity loadUserByUsername(String username);
 	
 	
