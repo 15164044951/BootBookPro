@@ -44,4 +44,10 @@ public class CustomerServiceImpl implements CustomerService {
 		
 	}
 
+	@Override
+	public void deleteCustomer(int id) {
+		customermapper.deleteCustomer(id);
+		
+	}
+
 }

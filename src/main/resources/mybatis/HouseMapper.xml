@@ -34,7 +34,7 @@
 						WHERE house_id = #{houseid}
 			</select>
 			<insert id="insertHouse" parameterType="com.test.sibo.entity.HouseEntity" >
-				INSERT INTO `haowangjia`.`hao_house`
+				INSERT INTO hao_house
 			            (
 			             `house_name`,
 			               <if test="house_remarks!=null and house_remarks!=''">

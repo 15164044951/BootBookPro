@@ -54,6 +54,12 @@ public class CustomerController {
 		   if(map.get("id")!=null) {
 			   int id = Integer.parseInt(map.get("id").toString());
 			   customer = customerservice.getCustomer(id);
+			   //如果是买的显示文本
+			   if(customer.getCustomer_type()==1) {
+				   customer.setCustomer_pricetext((customer.getCustomer_price()/10000)+"万");
+			   }else {//想租的价格
+				   customer.setCustomer_pricetext(customer.getCustomer_price()+"/每月");
+			   }
 		   }
 		   return ResultGenerator.genOkResult(customer);
 		   	
@@ -87,5 +93,17 @@ public class CustomerController {
 		   
 		   return ResultGenerator.genOkResult();
 		}
+	   
+	   @PostMapping("/deleteCustomer")
+	   public Result deleteCustomer(@RequestBody Map<String,String> map) {
+		   
+		   if(map.get("id")!=null) {
+			   int id = Integer.parseInt(map.get("id").toString()) ;
+			   customerservice.deleteCustomer(id);
+		   }
+		   return ResultGenerator.genOkResult();
+		   
+		   
+	   }
 
 }

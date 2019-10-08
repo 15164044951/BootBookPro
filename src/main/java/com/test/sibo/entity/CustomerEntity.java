@@ -16,8 +16,22 @@ public class CustomerEntity {
 	public String customer_optime;//上次更新时间	
 	public String customer_starttime;//创建时间
 	public String customer_searchtext;//搜索条件
+	public String customer_pricetext;//客源价位文本
+	public int customer_deletetype;//显示信息0：可显示，1：不显示
 	
 	
+	public int getCustomer_deletetype() {
+		return customer_deletetype;
+	}
+	public void setCustomer_deletetype(int customer_deletetype) {
+		this.customer_deletetype = customer_deletetype;
+	}
+	public String getCustomer_pricetext() {
+		return customer_pricetext;
+	}
+	public void setCustomer_pricetext(String customer_pricetext) {
+		this.customer_pricetext = customer_pricetext;
+	}
 	public String getCustomer_searchtext() {
 		return customer_searchtext;
 	}

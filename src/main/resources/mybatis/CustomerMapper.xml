@@ -12,16 +12,26 @@
 			<if test="searchText!=null and searchText!=''">
 				and  customer_searchtext LIKE CONCAT("%",#{searchText},"%")
 			</if>
+			<if test="deletetype!=null and deletetype!=''">
+				and  customer_deletetype = 1
+			</if>
+			
+			<if test="deletetype==null || deletetype==''">
+				and  customer_deletetype = 0
+			</if>
 	</sql>
 	<select id="listCustomer" resultType="com.test.sibo.entity.CustomerEntity" parameterType="Map">
 			SELECT * 
 			FROM `hao_customer` 
 			<include refid="listWhereCustomer"/>
+			
 			ORDER BY customer_id DESC
 	</select>
 	<select id="listCustomerFive" resultType="com.test.sibo.entity.CustomerEntity">
 			SELECT * 
 			FROM `hao_customer` 
+			WHERE 
+				customer_deletetype = 0
 			ORDER BY customer_id DESC
 			LIMIT 0,5	
 	</select>
@@ -30,10 +40,11 @@
 			SELECT hc.* 
 			FROM `hao_customer` hc
 			WHERE 
-				hc.`customer_id`=#{id}
+				hc.`customer_id`=#{id} 
+				and customer_deletetype = 0
 	</select>
 	<insert id="insertCustomer" parameterType="com.test.sibo.entity.CustomerEntity" >
-				INSERT INTO `haowangjia`.`hao_customer`
+				INSERT INTO hao_customer
 			            (
 			             `customer_name`,
 			             `customer_type`,
@@ -58,4 +69,9 @@
 			        #{customer_searchtext});
 	</insert>
 	
+	<update id="deleteCustomer" parameterType="int">
+			UPDATE `hao_customer` 
+			SET customer_deletetype = 1 
+			WHERE customer_id = #{id}
+	</update>
 </mapper>

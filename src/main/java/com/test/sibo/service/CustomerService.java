@@ -17,4 +17,6 @@ public interface CustomerService {
 	public CustomerEntity getCustomer(int id);
 	//创建客源信息
 	public void insertCustomer(CustomerEntity customer);
+	//删除客源
+	public void deleteCustomer(int id);
 }
